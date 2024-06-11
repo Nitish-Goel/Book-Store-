@@ -44,7 +44,10 @@ app.get('/book',async (req, res)=>{
     try{    
         const book = await Book.find({});
         console.log("Books are Displayed");
-        res.status(200).json(book);
+        res.status(200).json({
+            count : book.length,
+            data : book,
+        }); // Shape/structure the output of this route
         
     }catch(err){
         console.log(err.message);
