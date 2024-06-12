@@ -17,16 +17,16 @@ app.use(express.json()); // Act as (body-parser)middleWare to parsing req.body .
 // MiddleWare for handling CORS policy
 // CORS stand for : Cross-origin resource sharing 
 // Opt(1): Allow all origins with default of cors(*).
-// app.use(cors());
+   app.use(cors());
 
 // Opt(2): Allow custom origins of cors.
-app.use(
-    cors({
-        origin: 'http://localhost:3000', // Now the client with this origin can access this server
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type'],
-    })
-);
+// app.use(
+//     cors({
+//         origin: 'http://localhost:3000', // Now the client with this origin can access this server
+//         methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//         allowedHeaders: ['Content-Type'],
+//     })
+// );
 
 
 app.get('/', (req, res) => {
