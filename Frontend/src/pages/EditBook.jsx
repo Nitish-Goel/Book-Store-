@@ -9,10 +9,14 @@ import { useSnackbar } from 'notistack';
 const EditBook = () => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
-  const [publishYear, setPublishYear] = useState('')
+  const [language, setLanguage] = useState('')
+  const [pages, setPages] = useState('')
+  const [year, setYear] = useState('')
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const {id} = useParams();
+
   const {enqueueSnackbar } = useSnackbar();
 
 
@@ -22,7 +26,9 @@ const EditBook = () => {
     .then((response)=>{
       setAuthor(response.data.author);
       setTitle(response.data.title);
-      setPublishYear(response.data.publishYear);
+      setLanguage(response.data.language);
+      setPages(response.data.pages);
+      setYear(response.data.year);
       setLoading(false);
     }).catch((err)=>{
       setLoading(false);
@@ -33,9 +39,11 @@ const EditBook = () => {
 
   const handleEditBook = () => {
     const data = {
-      title,
       author,
-      publishYear,
+      language,
+      pages,
+      title,
+      year,
     };
     setLoading(true);
     axios.put(`http://localhost:5555/book/${id}`, data)
@@ -79,11 +87,29 @@ const EditBook = () => {
           />
         </div>
         <div className="my-4">
+          <label className='text-xl mr-4 text-gray-500'>Language</label>
+          <input 
+          type="text" 
+          value={language} 
+          onChange={(e)=>setLanguage(e.target.value)}
+          className='border-2 border-gray-500 px-4 py-2 w-full'
+          />
+        </div>
+        <div className="my-4">
+          <label className='text-xl mr-4 text-gray-500'>Pages</label>
+          <input 
+          type="text" 
+          value={pages} 
+          onChange={(e)=>setPages(e.target.value)}
+          className='border-2 border-gray-500 px-4 py-2 w-full'
+          />
+        </div>
+        <div className="my-4">
           <label className='text-xl mr-4 text-gray-500'>Publish Year</label>
           <input 
           type="text" 
-          value={publishYear} 
-          onChange={(e)=>setPublishYear(e.target.value)}
+          value={year} 
+          onChange={(e)=>setYear(e.target.value)}
           className='border-2 border-gray-500 px-4 py-2 w-full'
           />
         </div>

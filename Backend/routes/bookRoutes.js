@@ -1,19 +1,19 @@
 const express = require("express");
 const router = express.Router();
 
-const Book = require('../models/book.js');
+const Books = require('../models/Books.js');
 
 // Route to save a new book
 
 router.post('/book', async (req, res) => {
     try {
-        if (!req.body.title || !req.body.author || !req.body.publishYear) {
+        if (!req.body.title || !req.body.author || !req.body.year) {
             return res.status(400).send({
                 message: "Send all required fields: title, author, publishYear",
             });
         }
         const newBookData = req.body;
-        const newBook = new Book(newBookData);
+        const newBook = new Books(newBookData);
         const response = await newBook.save();
 
         console.log("New book Saved");
@@ -28,7 +28,7 @@ router.post('/book', async (req, res) => {
 // Route to get books
 router.get('/books', async (req, res) => {
     try {
-        const books = await Book.find({});
+        const books = await Books.find({});
         console.log("Books are Displayed");
         res.status(200).json({
             count: books.length,
@@ -45,7 +45,7 @@ router.get('/books', async (req, res) => {
 router.get('/book/:id', async (req, res) => {
     try {
         const { id } = req.params; // deStructureing req.params id
-        const book = await Book.findById(id);
+        const book = await Books.findById(id);
 
         console.log("Single-book is Displayed");
         res.status(200).json(book);
@@ -59,13 +59,13 @@ router.get('/book/:id', async (req, res) => {
 // Route for update a book.
 router.put('/book/:id', async (req, res) => {
     try {
-        if (!req.body.title || !req.body.author || !req.body.publishYear) {
+        if (!req.body.title || !req.body.author || !req.body.year) {
             return res.status(400).send({
                 message: "Send all required fields: title, author, publishYear",
             });
         }
         const { id } = req.params;
-        const result = await Book.findByIdAndUpdate(id, req.body, {
+        const result = await Books.findByIdAndUpdate(id, req.body, {
             new: true,
             runValidators: true
         });
@@ -88,7 +88,7 @@ router.delete('/book/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
-        const result = await Book.findByIdAndDelete(id);
+        const result = await Books.findByIdAndDelete(id);
         if (!result) {
             res.status(404).json({ message: "Book not found" });
         }

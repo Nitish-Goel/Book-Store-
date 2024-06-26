@@ -24,7 +24,7 @@ const Home = () => {
     }, []);
 
     return (
-        <div className='p-4'>
+        <div className='p-4 '>
             <div className="flex justify-between items-center">
                 <h1 className="text-3xl my-8">Books List</h1>
                 <Link to='/book/create'>
@@ -40,6 +40,8 @@ const Home = () => {
                             <th className='border border-slate-600 rounded-md'>No.</th>
                             <th className='border border-slate-600 rounded-md'>Title</th>
                             <th className='border border-slate-600 rounded-md max-md:hidden'>Author</th>
+                            <th className='border border-slate-600 rounded-md max-md:hidden'>Language</th>
+                            <th className='border border-slate-600 rounded-md max-md:hidden'>Pages</th>
                             <th className='border border-slate-600 rounded-md max-md:hidden'>Publish Year</th>
                             <th className='border border-slate-600 rounded-md '>Operations</th>
                         </tr>
@@ -57,7 +59,13 @@ const Home = () => {
                                     {book.author}
                                 </td>
                                 <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-                                    {book.publishYear}
+                                    {book.language}
+                                </td>
+                                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+                                    {book.pages}
+                                </td>
+                                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+                                    {book.year}
                                 </td>
                                 <td className='border border-slate-700 rounded-md text-center '>
                                     <div className="flex justify-center gap-x-4">
