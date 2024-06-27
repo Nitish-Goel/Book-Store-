@@ -3,7 +3,11 @@ require("dotenv").config();
 
 const mongoURl = process.env.mongoURl;
 
-mongoose.connect(mongoURl)
+mongoose.connect(mongoURl,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    socketTimeoutMS: 20000, // 20 seconds
+  })
 .then(()=>{
         console.log("App Connected to database");
 }).catch((err)=>{
